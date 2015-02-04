@@ -23,7 +23,6 @@ use warnings;
 
 Net::HL7::Request
 
-
 =head1 SYNOPSIS
 
 my $request = new Net::HL7::Request();

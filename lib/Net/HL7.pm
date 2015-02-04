@@ -10,12 +10,14 @@
 
 package Net::HL7;
 
-our $VERSION = "0.78";
+use strict;
+
+our $VERSION = "0.79";
 
 =pod
-    
+
 =head1 NAME
-    
+
 Net::HL7
 
 =head1 DESCRIPTION
@@ -24,7 +26,7 @@ The Net-HL7 package is a simple Perl API for creating, parsing sending
 and receiving HL7 messages. To create an empty HL7 message object, do:
 
 =begin text
-    
+
     use Net::HL7::Message;
 
     my $msg = new Net::HL7::Message();
@@ -39,7 +41,7 @@ and add segments like:
     my $pid = new Net::HL7::Segment("PID");
 
     $pid->setField(3, "1231313");
-	
+
     $msg->addSegment($msh);
     $msg->addSegment($pid);
 
@@ -72,6 +74,7 @@ properties.
 Separator for segments within a message. Usually this is \015.
 
 =cut
+
 our $SEGMENT_SEPARATOR = "\015";
 
 =pod
@@ -81,19 +84,19 @@ our $SEGMENT_SEPARATOR = "\015";
 Field separator for this message. In general '|' is used.
 
 =cut
-our $FIELD_SEPARATOR = "|";
 
+our $FIELD_SEPARATOR = "|";
 
 =pod
 
 =item B<NULL>
 
 HL7 NULL field, defaults to "". This is therefore different from not
-setting the fields at all. 
+setting the fields at all.
 
 =cut
-our $NULL = "\"\"";
 
+our $NULL = "\"\"";
 
 =pod
 
@@ -103,8 +106,8 @@ Separator used in fields supporting components. Usually this is the
 '^' character.
 
 =cut
-our $COMPONENT_SEPARATOR    = "^";
 
+our $COMPONENT_SEPARATOR    = "^";
 
 =pod
 
@@ -113,8 +116,8 @@ our $COMPONENT_SEPARATOR    = "^";
 Separator for fields that may be repeated. Defaults to '~'.
 
 =cut
-our $REPETITION_SEPARATOR   = "~";
 
+our $REPETITION_SEPARATOR   = "~";
 
 =pod
 
@@ -123,8 +126,8 @@ our $REPETITION_SEPARATOR   = "~";
 Escape character for escaping special characters. Defaults to '\'.
 
 =cut
-our $ESCAPE_CHARACTER       = "\\";
 
+our $ESCAPE_CHARACTER       = "\\";
 
 =pod
 
@@ -134,8 +137,8 @@ Separator used in fields supporting subcomponents. Usually this is
 the '&' character.
 
 =cut
-our $SUBCOMPONENT_SEPARATOR = "&";
 
+our $SUBCOMPONENT_SEPARATOR = "&";
 
 =pod
 
@@ -146,7 +149,7 @@ This is the version used in the MSH(12) field. Defaults to 2.2.
 =back
 
 =cut
-our $HL7_VERSION            = "2.2";
 
+our $HL7_VERSION            = "2.2";
 
 1;

@@ -21,7 +21,6 @@ use POSIX qw(strftime);
 
 Net::HL7::Segments::MSH
 
-
 =head1 SYNOPSIS
 
 my $seg = new Net::HL7::Segments::MSH();
@@ -57,6 +56,7 @@ subsubarrays. If the reference is not given, the MSH segment will be
 created with the MSH 1,2,7,10 and 12 fields filled in for convenience.
 
 =cut
+
 sub _init {
     
     my ($self, $fieldsRef) = @_;
@@ -104,7 +104,10 @@ will change the values of COMPONENT_SEPARATOR, REPETITION_SEPARATOR,
 ESCAPE_CHARACTER and SUBCOMPONENT_SEPARATOR for the message, if the
 string is of length 4.
 
+=back
+
 =cut
+
 sub setField {
 
     my ($self, $index, $value) = @_;
@@ -139,4 +142,3 @@ free software; you can redistribute it and/or modify it under the same
 terms as Perl itself.
 
 =cut
-

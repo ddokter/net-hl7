@@ -23,7 +23,6 @@ use base qw(Net::HL7::Message);
 
 Net::HL7::Messages::ACK
 
-
 =head1 SYNOPSIS
 
 $ack = new Net::HL7::Messages::ACK($request);
@@ -41,6 +40,7 @@ incoming message.
 =over 4
 
 =cut
+
 sub _init {
 
     my ($self, $req) = @_;
@@ -106,6 +106,7 @@ mode (normal or enhanced) based upon the request, if not provided.
 The message provided in $msg will be set in MSA 3.
 
 =cut
+
 sub setAckCode {
 
     my ($self, $code, $msg) = @_;
@@ -136,6 +137,7 @@ error code to either AE or CE, depending on the mode of the incoming
 message.
 
 =cut
+
 sub setErrorMessage {
 
     my ($self, $msg) = @_;

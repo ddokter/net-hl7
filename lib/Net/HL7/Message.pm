@@ -89,6 +89,7 @@ If the message couldn't be created, for example due to a erroneous HL7
 message string, undef is returned.
 
 =cut
+
 sub new {
     
     my $class = shift;
@@ -227,6 +228,7 @@ Add the segment. to the end of the message. The segment should be an
 instance of L<Net::HL7::Segment|Net::HL7::Segment>.
 
 =cut
+
 sub addSegment { 
 
     my ($self, $segment) = @_;
@@ -248,6 +250,7 @@ L<Net::HL7::Segment|Net::HL7::Segment>. If the index is not given,
 nothing happens.
 
 =cut
+
 sub insertSegment {
 
     my ($self, $segment, $idx) = @_;
@@ -282,6 +285,7 @@ Return the segment specified by $index. Segment count within the
 message starts at 0.
 
 =cut 
+
 sub getSegmentByIndex {
 
     my ($self, $index) = @_;
@@ -297,6 +301,7 @@ sub getSegmentByIndex {
 Return an array of all segments with the given name
 
 =cut 
+
 sub getSegmentsByName {
 
     my ($self, $name) = @_;
@@ -320,6 +325,7 @@ happens, if it does, all segments after this one will be moved one
 index up.
 
 =cut
+
 sub removeSegmentByIndex {
 
     my ($self, $index) = @_;
@@ -338,6 +344,7 @@ control characters and hl7 version, based on MSH(1), MSH(2) and
 MSH(12).
 
 =cut
+
 sub setSegment {
 
     my ($self, $segment, $idx) = @_;
@@ -385,6 +392,7 @@ sub _resetCtrl {
 Return an array containing all segments in the right order.
 
 =cut
+
 sub getSegments {
 
     my $self = shift;
@@ -402,9 +410,8 @@ send the message over a socket to an HL7 server. To print to other
 output, use the $pretty argument as some true value. This will not use
 the default segment separator, but '\n' instead.
 
-=back
-
 =cut
+
 sub toString {
     
     my ($self, $pretty) = @_;
@@ -437,6 +444,7 @@ message. That means the string representation will use the message's
 separators.
 
 =cut
+
 sub getSegmentAsString {
 
     my ($self, $index) = @_;
@@ -469,6 +477,7 @@ sub getSegmentAsString {
 
 
 =cut
+
 sub getSegmentFieldAsString {
  
     my ($self, $segIndex, $fldIndex) = @_;
@@ -489,7 +498,10 @@ Remove the segment indexed by $name. If it doesn't exist, nothing
 happens, if it does, all segments after this one will be moved one
 index up.
 
+=back
+
 =cut
+
 sub removeSegmentByName {
 
      my ($self, $name) = @_;

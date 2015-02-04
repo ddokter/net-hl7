@@ -1,6 +1,9 @@
 Change history
 --------------
 
+0.79:
+* Added IO::Socket::Timeout to requirements
+
 0.78:
 * Added timeout to daemon connection, so as to close connections on badly
   behaved clients

@@ -46,6 +46,7 @@ for the IO::Socket::INET. Default settings are: Listen = SOMAXCONN,
 Proto = tcp, Reuse = 1.
 
 =cut
+
 sub new
 {
     my($class, %args) = @_;
@@ -69,6 +70,7 @@ is returned containing the new I<Net::HL7::Daemon::Client> reference
 and the peer address; the list will be empty upon failure.
 
 =cut
+
 sub accept
 {
     my $self = shift;
@@ -89,6 +91,7 @@ sub accept
 Returns the host where this daemon can be reached.
 
 =cut
+
 sub getHost
 {
     my $self = shift;
@@ -112,6 +115,7 @@ Returns the port on which this daemon is listening.
 =back
 
 =cut
+
 sub getPort {
 
     my $self = shift;
@@ -163,6 +167,7 @@ message. So discard the client only when there's no more requests
 pending, or the delivering service might experience timeouts.
 
 =cut
+
 sub new
 {
     my($class, %args) = @_;
@@ -240,6 +245,7 @@ Net::HL7::Response, but it is better to rely on the ACK that is
 generated internally.
 
 =cut
+
 sub sendAck {
 
     my ($self, $res) = @_;
@@ -266,6 +272,7 @@ response, with the Acknowledge Code (MSA(1)) set to CE or AE,
 depending on the original request, to signal an error.
 
 =cut
+
 sub sendNack {
 
     my ($self, $errMsg, $res) = @_;
@@ -295,6 +302,7 @@ can hold an arbitrary HL7 message.
 =back
 
 =cut
+
 sub sendResponse {
 
     my ($self, $res) = @_;
@@ -305,6 +313,7 @@ sub sendResponse {
 
 
 =pod
+
 =head1 SEE ALSO
 
 RFC 2068

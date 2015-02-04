@@ -3,7 +3,7 @@
 # File      : Segment.pm
 # Author    : Duco Dokter
 # Created   : Tue Mar  4 13:03:00 2003
-# Version   : $Id: Segment.pm,v 1.15 2014/09/11 09:17:20 wyldebeast Exp $ 
+# Version   : $Id: Segment.pm,v 1.15 2014/09/11 09:17:20 wyldebeast Exp $
 # Copyright : Wyldebeast & Wunderliebe
 #
 ################################################################################
@@ -21,7 +21,6 @@ use Net::HL7::Message;
 =head1 NAME
 
 Net::HL7::Segment
-
 
 =head1 SYNOPSIS
 
@@ -51,19 +50,20 @@ subsubarrays. Repeated fields can not be supported the same way, since
 we can't distinguish between composed fields and repeated fields.
 
 =cut
+
 sub new {
-    
+
     my $class = shift;
     bless my $self = {}, $class;
-    
+
     $self->_init(@_) || return undef;
-    
+
     return $self;
 }
 
 
 sub _init {
-    
+
     my ($self, $name, $fieldsRef) = @_;
 
     # Is the name 3 upper case characters?
@@ -78,7 +78,7 @@ sub _init {
     if ($fieldsRef && ref($fieldsRef) eq "ARRAY") {
 
         for (my $i = 0; $i < @{ $fieldsRef }; $i++) {
-	    
+
             $self->setField($i + 1, $fieldsRef->[$i]);
         }
     }
@@ -106,14 +106,15 @@ This will render the field as the double quote ("").
 If values are not provided at all, the method will just return.
 
 =cut
+
 sub setField {
 
     my ($self, $index, $value) = @_;
-    
+
     return undef unless ($index and defined($value));
-    
+
     $self->{FIELDS}->[$index] = $value;
-    
+
     return 1;
 }
 
@@ -130,6 +131,7 @@ my @subfields = $seg->getField(9)
 otherwise the thing returned will be a reference to an array.
 
 =cut
+
 sub getField {
 
     my ($self, $index) = @_;
@@ -145,7 +147,7 @@ sub getField {
     else {
         return $self->{FIELDS}->[$index];
     }
-}    
+}
 
 
 
@@ -156,6 +158,7 @@ sub getField {
 Get the string representation of the field
 
 =cut
+
 sub getFieldAsString {
 
     my ($self, $index) = @_;
@@ -164,17 +167,17 @@ sub getFieldAsString {
     my $field = $self->{FIELDS}->[$index];
 
     if (ref($field) eq "ARRAY") {
-		
+
         for (my $i = 0; $i < @{ $field }; $i++) {
-		    
+
             if (ref($field->[$i]) eq "ARRAY") {
-                
+
                 $fieldStr .= join($Net::HL7::SUBCOMPONENT_SEPARATOR, @{ $field->[$i] });
             }
             else {
                 $fieldStr .= $field->[$i];
             }
-            
+
             if ($i < (@{ $field } - 1)) {
                 $fieldStr .= $Net::HL7::COMPONENT_SEPARATOR;
             }
@@ -183,7 +186,7 @@ sub getFieldAsString {
     else {
         $fieldStr .= $field;
     }
-    
+
     return $fieldStr;
 }
 
@@ -195,6 +198,7 @@ sub getFieldAsString {
 Get the number of fields for this segment, not including the name
 
 =cut
+
 sub size {
 
     my $self = shift;
@@ -212,6 +216,7 @@ only the 'from' value is provided, all fields from this index till the
 end of the segment will be returned.
 
 =cut
+
 sub getFields {
 
     my ($self, $from, $to) = @_;
@@ -220,16 +225,19 @@ sub getFields {
     $to || ($to = $#{$self->{FIELDS}});
 
     return @{ $self->{FIELDS} }[$from..$to];
-}    
+}
 
 
-=pod 
+=pod
 
 =item B<getName()>
 
 Get the name of the segment. This is basically the value at index 0
 
+=back
+
 =cut
+
 sub getName {
 
     my $self = shift;
