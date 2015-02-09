@@ -1,25 +1,14 @@
-################################################################################
-#
-# File      : Connection.pm
-# Author    : Duco Dokter
-# Created   : Mon Nov 11 17:43:16 2002
-# Version   : $Id: Connection.pm,v 1.5 2005/04/20 07:29:44 wyldebeast Exp $ 
-# Copyright : D.A.Dokter
-#
-################################################################################
-
 package Net::HL7::Connection;
 
 use 5.004;
 use strict;
-#use warnings;
 use Net::HL7::Response;
 use IO::Socket;
 use Errno qw(:POSIX);
 
 =head1 NAME
 
-Net::HL7::Connection - A HL7 connection
+Net::HL7::Connection - An HL7 connection
 
 =head1 SYNOPSIS
 

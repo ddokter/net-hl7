@@ -37,8 +37,6 @@ incoming message.
 
 =head1 METHODS
 
-=over 4
-
 =cut
 
 sub _init {
@@ -53,12 +51,12 @@ sub _init {
 
     if ($reqMsh) {
 
-	my @flds = $req->getSegmentByIndex(0)->getFields(1);
-	
-	$msh = new Net::HL7::Segments::MSH(\@flds);
+        my @flds = $req->getSegmentByIndex(0)->getFields(1);
+        
+        $msh = new Net::HL7::Segments::MSH(\@flds);
     }
     else {
-	$msh = new Net::HL7::Segments::MSH();
+        $msh = new Net::HL7::Segments::MSH();
     }
 
     my $msa = new Net::HL7::Segment("MSA");
@@ -95,6 +93,8 @@ sub _init {
 }
 
 =pod
+
+=over 4
 
 =item B<setAckCode($code, [$msg])>
 

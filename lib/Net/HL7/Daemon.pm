@@ -1,13 +1,3 @@
-################################################################################
-#
-# File      : Daemon.pm
-# Author    : D.A.Dokter
-# Created   : Mon Nov 11 17:43:16 2002
-# Version   : $Id: Daemon.pm,v 1.13 2015/01/29 15:30:11 wyldebeast Exp $
-# Copyright : Wyldebeast & Wunderliebe
-#
-################################################################################
-
 package Net::HL7::Daemon;
 
 use IO::Socket qw(AF_INET INADDR_ANY inet_ntoa);
@@ -151,6 +141,23 @@ of I<Net::HL7::Daemon>.
 
 =over 4
 
+=item B<$d = new Net::HL7::Daemon::Client()>
+
+Create a new instance of the Client class. Arguments are the same as
+for the IO::Socket::INET. Normally, you shouldn't do this...
+
+=cut
+
+sub new
+{
+    my($class, %args) = @_;
+    $args{Timeout} ||= 10;
+
+    return $class->SUPER::new(%args);
+}
+
+=pod
+
 =item B<getRequest()>
 
 Get the current request on this client. The current request is either
@@ -167,14 +174,6 @@ message. So discard the client only when there's no more requests
 pending, or the delivering service might experience timeouts.
 
 =cut
-
-sub new
-{
-    my($class, %args) = @_;
-    $args{Timeout} ||= 10;
-
-    return $class->SUPER::new(%args);
-}
 
 sub getRequest
 {
@@ -237,7 +236,7 @@ sub getNextRequest
 
 =pod
 
-=item B<sendAck([$res])>
+=item B<sendAck($res)>
 
 Write a I<Net::HL7::Messages::ACK> message to the client as a
 response, to signal success. You may provide your own
@@ -252,20 +251,20 @@ sub sendAck {
 
     # If this is true, we didn't get the incoming message yet!
     if (! ${*$self}{'REQ'}) {
-	$self->getRequest() || return undef;
+        $self->getRequest() || return undef;
     }
 
     if (! ref $res) {
-	$res = new Net::HL7::Messages::ACK(${*$self}{'REQ'});
+        $res = new Net::HL7::Messages::ACK(${*$self}{'REQ'});
     }
 
     print $self $Net::HL7::Connection::MESSAGE_PREFIX . $res->toString() .
-	$Net::HL7::Connection::MESSAGE_SUFFIX;
+        $Net::HL7::Connection::MESSAGE_SUFFIX;
 }
 
 =pod
 
-=item B<sendNack([$errMsg], [$res])>
+=item B<sendNack($errMsg, $res)>
 
 Write a I<Net::HL7::Messages::ACK> message to the client as a
 response, with the Acknowledge Code (MSA(1)) set to CE or AE,
@@ -279,17 +278,17 @@ sub sendNack {
 
     # If this is true, we didn't get the incoming message yet!
     if (! ${*$self}{'REQ'}) {
-	$self->getRequest() || return undef;
+        $self->getRequest() || return undef;
     }
-
+    
     if (! ref $res) {
-	$res = new Net::HL7::Messages::ACK(${*$self}{'REQ'});
+        $res = new Net::HL7::Messages::ACK(${*$self}{'REQ'});
     }
-
+    
     $res->setAckCode("E", $errMsg);
-
+    
     print $self $Net::HL7::Connection::MESSAGE_PREFIX . $res->toString() .
-	$Net::HL7::Connection::MESSAGE_SUFFIX;
+        $Net::HL7::Connection::MESSAGE_SUFFIX;
 }
 
 =pod
@@ -308,9 +307,8 @@ sub sendResponse {
     my ($self, $res) = @_;
 
     print $self $Net::HL7::Connection::MESSAGE_PREFIX . $res->toString() .
-	$Net::HL7::Connection::MESSAGE_SUFFIX;
+        $Net::HL7::Connection::MESSAGE_SUFFIX;
 }
-
 
 =pod
 

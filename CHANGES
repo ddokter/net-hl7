@@ -1,6 +1,9 @@
 Change history
 --------------
 
+0.80:
+* POD fixes
+
 0.79:
 * Added IO::Socket::Timeout to requirements
 
