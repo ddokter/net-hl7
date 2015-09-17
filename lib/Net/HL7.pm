@@ -12,7 +12,7 @@ package Net::HL7;
 
 use strict;
 
-our $VERSION = "0.80";
+our $VERSION = "0.81";
 
 =pod
 
